@@ -1,0 +1,10 @@
+# Intellij and other
+.DS_Store
+.idea/
+*.iml
+*.pyc
+
+# Unchecked project files
+object_detection/output/*
+object-detection/__pycache__
+test/__pycache__
