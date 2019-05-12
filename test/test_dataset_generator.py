@@ -35,4 +35,3 @@ class TestDatasetGenerator(object):
 
         one_roi = result["rois"][0]
         assert 21 == len(one_roi["class"])
-

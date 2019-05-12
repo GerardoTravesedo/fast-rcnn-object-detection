@@ -3,8 +3,8 @@ from os import listdir
 
 import numpy as np
 
-import xml_parser
-import roi_tools
+import dataset.xml_parser as xml_parser
+import dataset.roi_tools as roi_tools
 from tools import image_tools
 
 INPUT_FOLDER = "../../../datasets/images/pascal-voc/original/VOCdevkit/VOC2012/"

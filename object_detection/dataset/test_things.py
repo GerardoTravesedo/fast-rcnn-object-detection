@@ -1,9 +1,11 @@
 import math
 
 import numpy as np
-
-import dataset_generator, xml_parser, roi_tools
 from tools import image_tools
+
+import dataset.dataset_generator as dataset_generator
+import dataset.xml_parser as xml_parser
+import dataset.roi_tools as roi_tools
 
 INPUT_FOLDER = "dataset-training-test/training/"
 

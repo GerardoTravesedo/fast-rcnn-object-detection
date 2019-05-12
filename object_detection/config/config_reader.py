@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser
 
 NET_SECTION = "Net"
 
@@ -10,7 +10,7 @@ OUTPUT_SECTION = "Output"
 class ConfigReader:
 
     def __init__(self, prop_file):
-        config = ConfigParser.ConfigParser()
+        config = configparser.ConfigParser()
         config.read(prop_file)
         self._config = config
 
@@ -80,4 +80,3 @@ class ConfigReader:
 
     def get_training_error_file(self):
         return self._config.get(OUTPUT_SECTION, "training.error.file")
-

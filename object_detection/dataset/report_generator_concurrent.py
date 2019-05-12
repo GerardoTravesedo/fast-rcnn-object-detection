@@ -1,10 +1,10 @@
 from multiprocessing import Pool
 from os import getpid
 from os import listdir
-import xml_parser
+import dataset.xml_parser as xml_parser
 import itertools
 
-import dataset_generator
+import dataset.dataset_generator as dataset_generator
 
 INPUT_FOLDER = "../../../datasets/images/pascal-voc/separated/training/"
 

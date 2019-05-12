@@ -3,7 +3,7 @@ import pickle
 from multiprocessing import Pool
 from os import listdir
 
-import dataset_generator
+import dataset.dataset_generator as dataset_generator
 
 TRAINING_INPUT_FOLDER = "../../../datasets/images/pascal-voc/separated/training-reduced/"
 

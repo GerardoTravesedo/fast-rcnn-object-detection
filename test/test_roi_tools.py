@@ -12,9 +12,10 @@ class TestRoiTools(object):
         rois = roi_tools.find_rois_selective_search(input_pixels)
         # If something changes in the way the rois are calculates we will know thanks to
         # this assertion
-        assert len(rois) == 793
+        assert len(rois) == 847
         # If something changes in the roi output format we will know thanks to this assertion
-        np.testing.assert_equal(np.array([447, 325, 4, 3]), rois[0])
+        print(rois)
+        np.testing.assert_equal(np.array([0, 0, 188, 125]), rois[0])
 
     def test_calculate_iou_25_percent(self):
         bbox_1 = np.array([0, 0, 10, 10])

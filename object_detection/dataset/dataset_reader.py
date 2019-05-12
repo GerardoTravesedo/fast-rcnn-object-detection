@@ -5,7 +5,7 @@ import numpy as np
 
 class DatasetReader:
     def __init__(self, input_files, number_images_in_batch, number_rois_per_image,
-            max_foreground_rois_per_image):
+        max_foreground_rois_per_image):
         """
         Creates object that will be used to get mini-batches for rcnn training and prediction
 
@@ -27,7 +27,7 @@ class DatasetReader:
             # gt_bboxes - Information about the ground truth boxes for the image (not needed here)
             # rois - Information about foreground rois. Contains bbox, class and reg target
             # rois_background - Information about background rois. Contains bbox and class
-            self.data = pickle.load(fo)
+            self.data = pickle.load(fo, encoding='latin1')
 
         # next_records represents the row that marks the beginning of the next batch
         self.next_record = 0
@@ -49,7 +49,7 @@ class DatasetReader:
             self.current_file += 1
             # We load the next input file into memory
             with open(self.files[self.current_file], 'rb') as fo:
-                self.data = pickle.load(fo)
+                self.data = pickle.load(fo, encoding='latin1')
             # We set the current position at the beginning of the new file
             self.next_record = 0
             # Updating the total records in file, since the new file can have a different size
@@ -76,9 +76,9 @@ class DatasetReader:
 
         gt_objects_batch = np.array([image_data["gt_bboxes"] for image_data in data_batch])
 
-        print "Batch: [size: {}, initial_index: {}, final_index: {}, images: {}]"\
-            .format(records_to_fetch, self.next_record, self.next_record + records_to_fetch,
-                    str(images_names_batch))
+        print("Batch: [size: {}, initial_index: {}, final_index: {}, images: {}]"
+              .format(records_to_fetch, self.next_record, self.next_record + records_to_fetch,
+                      str(images_names_batch)))
 
         self.next_record = self.next_record + self.number_images_in_batch
 

@@ -53,7 +53,7 @@ def find_rois_complete(image_pixels, gt_boxes, min_rois_foreground, max_rois_bac
     if len(rois_foreground) == 0:
         print("It couldn't find any foreground rois")
     else:
-        return np.array(rois_foreground.values()), np.array(rois_background.values())
+        return np.array(list(rois_foreground.values())), np.array(list(rois_background.values()))
 
 
 def find_rois_selective_search(image_pixels, scale=200, sigma=0.9, min_size=10):
@@ -84,7 +84,7 @@ def find_rois_selective_search(image_pixels, scale=200, sigma=0.9, min_size=10):
             # From [x, y, w, h] to {x, y, w, h}
             unique_rois[key] = rect
 
-    return np.array(unique_rois.values())
+    return np.array(list(unique_rois.values()))
 
 
 def find_foreground_rois_from_ground_truth_boxes(gt_boxes, image_shape):
@@ -118,8 +118,8 @@ def find_foreground_rois_from_ground_truth_boxes(gt_boxes, image_shape):
     def find_possible_coordinate_values(coordinate_value, axis_length, max_possible_value):
         possible_values = set()
 
-        max_axis_displacement = axis_length / 6
-        min_axis_displacement = max_axis_displacement / 2
+        max_axis_displacement = axis_length // 6
+        min_axis_displacement = max_axis_displacement // 2
 
         if not coordinate_value + max_axis_displacement > max_possible_value:
             possible_values.add(coordinate_value + max_axis_displacement)

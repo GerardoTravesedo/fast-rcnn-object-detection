@@ -66,4 +66,3 @@ class TestRoiTools(object):
 
         batch4 = target.get_batch()
         assert batch4 == {}
-

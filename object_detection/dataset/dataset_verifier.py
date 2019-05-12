@@ -34,7 +34,7 @@ def verify_file(file_path):
     print("Verifying dataset file {}".format(file_path))
 
     with open(file_path) as f:
-        data = pickle.load(f)
+        data = pickle.load(f, encoding='latin1')
         print("Number of records: {}".format(len(data)))
 
     for record in data:
@@ -124,7 +124,7 @@ def generate_images_with_bboxes(file_path):
     output_folder = "../verification/"
 
     with open(file_path) as f:
-        data = pickle.load(f)
+        data = pickle.load(f, encoding='latin1')
 
     for record in data:
         image = record["image"]

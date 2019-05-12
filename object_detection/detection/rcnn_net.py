@@ -1,9 +1,9 @@
 import tensorflow as tf
 
-import detect_and_classify_instances as pc
-import rcnn_multitask_loss as mloss
+import detection.detect_and_classify_instances as pc
+import detection.rcnn_multitask_loss as mloss
 import reduced_resnet_builder
-import roi_pooling_layer
+import detection.roi_pooling_layer as roi_pooling_layer
 
 
 def get_net(

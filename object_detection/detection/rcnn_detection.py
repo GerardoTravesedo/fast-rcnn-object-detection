@@ -5,9 +5,9 @@ import tensorflow as tf
 
 import config.config_reader as conf_reader
 import learning_rate_manager as rm
-import rcnn_net
+import detection.rcnn_net as rcnn_net
 import dataset.dataset_reader as ds_reader
-from tools import output_analyzer
+import tools.output_analyzer as output_analyzer
 
 
 class RCNNDetection:
