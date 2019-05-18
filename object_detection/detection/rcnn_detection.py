@@ -9,6 +9,8 @@ import detection.rcnn_net as rcnn_net
 import dataset.dataset_reader as ds_reader
 import tools.output_analyzer as output_analyzer
 
+from tensorflow.python.client import device_lib
+
 
 class RCNNDetection:
 
@@ -238,6 +240,8 @@ def run(properties_path, training_batch_files, test_batch_files):
 
 
 if __name__ == '__main__':
+    print("Available devices: {}".format(device_lib.list_local_devices()))
+
     properties = "../config/config.ini"
 
     training_folder = "../../../datasets/images/pascal-voc/transformed/training-reduced/"
