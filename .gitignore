@@ -5,6 +5,5 @@
 *.pyc
 
 # Unchecked project files
-object_detection/output/*
 object-detection/__pycache__
 test/__pycache__
