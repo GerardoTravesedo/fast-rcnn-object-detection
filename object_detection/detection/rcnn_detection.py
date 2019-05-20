@@ -245,11 +245,9 @@ if __name__ == '__main__':
     properties = "../config/config.ini"
 
     training_folder = "../../../datasets/images/pascal-voc/transformed/training-reduced/"
-    #training_folder = "../../dataset-rcnn/hyper-reduced/"
     training_files = [training_folder + file_name for file_name in listdir(training_folder)]
 
     test_folder = "../../../datasets/images/pascal-voc/transformed/test-reduced/"
-    #test_folder = "../../dataset-rcnn/hyper-reduced/"
     test_files = [test_folder + file_name for file_name in listdir(test_folder)]
 
     run(properties, training_files, test_files)
