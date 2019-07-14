@@ -84,6 +84,10 @@ class TestConfigReader(object):
         result = config_reader_object.get_learning_rate_manager_steps()
         assert result == 80
 
+    def test_get_learning_rate_exp_decay(self, config_reader_object):
+        result = config_reader_object.get_learning_rate_exp_decay()
+        assert result == 0.05
+
     def test_get_logs_path(self, config_reader_object):
         result = config_reader_object.get_logs_path()
         assert result == "/tmp/tensorflow_logs/rcnn-detector/"

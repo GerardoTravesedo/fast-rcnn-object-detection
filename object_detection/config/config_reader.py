@@ -72,6 +72,9 @@ class ConfigReader:
     def get_learning_rate_manager_steps(self):
         return self._config.getint(NET_SECTION, "learning.rate.manager.steps")
 
+    def get_learning_rate_exp_decay(self):
+        return self._config.getfloat(NET_SECTION, "learning.rate.exp.decay")
+
     def get_logs_path(self):
         return self._config.get(OUTPUT_SECTION, "logs.path")
 

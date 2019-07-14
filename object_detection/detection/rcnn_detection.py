@@ -4,7 +4,7 @@ from os import listdir
 import tensorflow as tf
 
 import config.config_reader as conf_reader
-import learning_rate_manager as rm
+import learning_rate.exponential_decay_learning_rate_manager as rm
 import detection.rcnn_net as rcnn_net
 import dataset.dataset_reader as ds_reader
 import tools.output_analyzer as output_analyzer
@@ -93,10 +93,9 @@ class RCNNDetection:
         training_start_time = time.time()
 
         iteration = 0
-        learning_rate_manager = rm.LearningRateManager(
+        learning_rate_manager = rm.ExponentialDecayLearningRateManager(
             self._config.get_learning_rate_initial_value(),
-            self._config.get_learning_rate_manager_threshold(),
-            self._config.get_learning_rate_manager_steps())
+            self._config.get_learning_rate_exp_decay())
 
         for epoch in range(0, self._config.get_number_epochs()):
             print("Epoch: {0}".format(str(epoch)))
@@ -117,7 +116,7 @@ class RCNNDetection:
                     self._roi_input_batch: training_batch["rois"],
                     self._class_label_batch: training_batch["class_labels"],
                     self._detection_label_batch: training_batch["reg_target_labels"],
-                    self._learning_rate: learning_rate_manager.learning_rate
+                    self._learning_rate: learning_rate_manager.get_learning_rate()
                 })
 
                 print("Error: {}".format(loss))
@@ -125,19 +124,20 @@ class RCNNDetection:
                 # Logging information about the multitask loss to be able to analyze it later
                 output_analyzer.write_error_to_file(
                     self._config.get_training_error_file(), iteration, loss)
-                # Adding error to learning rate manager so it can calculate when to reduce it
-                learning_rate_manager.add_error(loss)
 
                 iteration = iteration + 1
 
                 training_batch = training_reader.get_batch()
+
+            # Updating learning rate
+            learning_rate_manager.update_learning_rate(epoch)
 
             # Save model variables to disk
             if self._config.get_model_save():
                 save_path = saver.save(self._sess, self._config.get_model_path())
                 print("Model saved in path: {0} for epoch {1}".format(save_path, epoch))
                 print("Initial learning rate to use when training in the future: {0}"
-                      .format(str(learning_rate_manager.learning_rate)))
+                      .format(str(learning_rate_manager.get_learning_rate())))
 
         print("Done training. It took {0} minutes".format((time.time() - training_start_time) / 60))
 

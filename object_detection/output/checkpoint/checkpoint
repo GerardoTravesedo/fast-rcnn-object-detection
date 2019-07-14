@@ -1,2 +1,0 @@
-model_checkpoint_path: "fast-rcnn-model.ckpt"
-all_model_checkpoint_paths: "fast-rcnn-model.ckpt"

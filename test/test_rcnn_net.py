@@ -1,7 +1,7 @@
 import numpy as np
 import tensorflow as tf
 
-import learning_rate_manager as rm
+import learning_rate.exponential_decay_learning_rate_manager as rm
 import detection.rcnn_net as rcnn_net
 import dataset.dataset_reader as reader
 
@@ -30,7 +30,7 @@ class TestRoiPoolingLayer(tf.test.TestCase):
             class_label_batch_test = np.zeros((64, 21))
             detection_label_batch_test = np.zeros((64, 4))
 
-            learning_rate_manager = rm.LearningRateManager(0.001, 0.6, 80)
+            learning_rate_manager = rm.ExponentialDecayLearningRateManager(0.001, 0.05)
 
             result_loss, result_training, result_test = sess.run(target, feed_dict={
                 image_input_batch: training_batch["images"],
