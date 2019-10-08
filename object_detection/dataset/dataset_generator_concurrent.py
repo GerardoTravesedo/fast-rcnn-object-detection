@@ -5,9 +5,9 @@ from os import listdir
 
 import dataset.dataset_generator as dataset_generator
 
-TRAINING_INPUT_FOLDER = "../../../datasets/images/pascal-voc/separated/training-reduced/"
+TRAINING_INPUT_FOLDER = "../../../datasets/images/pascal-voc/separated/training/"
 
-TEST_INPUT_FOLDER = "../../../datasets/images/pascal-voc/separated/test-reduced/"
+TEST_INPUT_FOLDER = "../../../datasets/images/pascal-voc/separated/test/"
 
 TRAINING_IMAGE_FOLDER = TRAINING_INPUT_FOLDER + "image/"
 TRAINING_ANNOTATION_FOLDER = TRAINING_INPUT_FOLDER + "annotation/"
@@ -15,12 +15,12 @@ TRAINING_ANNOTATION_FOLDER = TRAINING_INPUT_FOLDER + "annotation/"
 TEST_IMAGE_FOLDER = TEST_INPUT_FOLDER + "image/"
 TEST_ANNOTATION_FOLDER = TEST_INPUT_FOLDER + "annotation/"
 
-TRAINING_OUTPUT_FOLDER = "../../../datasets/images/pascal-voc/transformed/training-reduced/"
+TRAINING_OUTPUT_FOLDER = "../../../datasets/images/pascal-voc/transformed/training/"
 
-TEST_OUTPUT_FOLDER = "../../../datasets/images/pascal-voc/transformed/test-reduced/"
+TEST_OUTPUT_FOLDER = "../../../datasets/images/pascal-voc/transformed/test/"
 
-NUMBER_THREADS = 5
-NUMBER_OUTPUT_FILES = 5
+NUMBER_THREADS = 14
+NUMBER_OUTPUT_FILES = 14
 
 
 def task(paths, output_folder, task_id):
@@ -92,7 +92,7 @@ def main(image_folder, annotation_folder, output_folder):
     images_annotations_group = []
     task_counter = 0
 
-    file_annotation_pairs = zip(images, annotations)
+    file_annotation_pairs = list(zip(images, annotations))
 
     # Generate rcnn input data for each combination of image and annotation
     for output_file_index in range(0, NUMBER_OUTPUT_FILES):

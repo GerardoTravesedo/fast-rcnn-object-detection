@@ -1,8 +1,9 @@
-import selectivesearch
-import math
-import numpy as np
 import itertools
+import math
 import random
+
+import numpy as np
+import selectivesearch
 
 NUMBER_CLASSES = 21
 
@@ -356,3 +357,25 @@ def class_string_to_index(class_string):
     classes[class_index] = 1
 
     return classes
+
+
+def class_index_to_string(class_index):
+    """
+    Converts a class index into its corresponding string value
+
+    :param
+        class_index: index representing the class
+    """
+    switcher = {
+        0: "background", 1: "person", 2: "bird", 3: "cat", 4: "cow", 5: "dog", 6: "horse",
+        7: "sheep", 8: "aeroplane", 9: "bicycle", 10: "boat", 11: "bus", 12: "car", 13: "motorbike",
+        14: "train", 15: "bottle", 16: "chair", 17: "diningtable", 18: "pottedplant",
+        19: "sofa", 20: "tvmonitor"
+    }
+
+    class_string = switcher.get(class_index, -1)
+
+    if class_index == -1:
+        raise Exception("Invalid class " + class_index)
+
+    return class_string

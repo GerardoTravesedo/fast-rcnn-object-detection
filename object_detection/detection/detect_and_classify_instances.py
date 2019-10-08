@@ -94,7 +94,7 @@ def detect_objects_for_class(
     # If scores for all rois are too low, it wont include objects of that class in the detection
     non_max_suppression_indices = tf.image.non_max_suppression(
         class_rois_detection_boxes, class_scores,
-        max_output_size=max_output_size, score_threshold=score_threshold)
+        max_output_size=max_output_size, score_threshold=score_threshold, iou_threshold=0.3)
 
     # Finding bboxes from indices
     extract_object_bboxes_by_indices = \

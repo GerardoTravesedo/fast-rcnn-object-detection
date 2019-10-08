@@ -93,8 +93,8 @@ class TestConfigReader(object):
         assert result == "/tmp/tensorflow_logs/rcnn-detector/"
 
     def test_get_test_output_file(self, config_reader_object):
-        result = config_reader_object.get_test_output_file()
-        assert result == "./output/result.txt"
+        result = config_reader_object.get_test_output_folder()
+        assert result == "./output"
 
     def test_get_training_error_file(self, config_reader_object):
         result = config_reader_object.get_training_error_file()

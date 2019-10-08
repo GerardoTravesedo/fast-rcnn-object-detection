@@ -78,8 +78,8 @@ class ConfigReader:
     def get_logs_path(self):
         return self._config.get(OUTPUT_SECTION, "logs.path")
 
-    def get_test_output_file(self):
-        return self._config.get(OUTPUT_SECTION, "test.output.file")
+    def get_test_output_folder(self):
+        return self._config.get(OUTPUT_SECTION, "test.output.folder")
 
     def get_training_error_file(self):
         return self._config.get(OUTPUT_SECTION, "training.error.file")

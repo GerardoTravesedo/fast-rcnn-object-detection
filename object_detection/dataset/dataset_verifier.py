@@ -33,7 +33,7 @@ def verify_file(file_path):
     """
     print("Verifying dataset file {}".format(file_path))
 
-    with open(file_path) as f:
+    with open(file_path, mode='rb') as f:
         data = pickle.load(f, encoding='latin1')
         print("Number of records: {}".format(len(data)))
 
@@ -139,7 +139,7 @@ def generate_images_with_bboxes(file_path):
 
 
 if __name__ == '__main__':
-    training_dataset_folder = "../../../datasets/images/pascal-voc/transformed/training-reduced/"
-    test_dataset_folder = "../../../datasets/images/pascal-voc/transformed/test-reduced/"
-    verify_files(training_dataset_folder)
+    training_dataset_folder = "../../../datasets/images/pascal-voc/transformed/training/"
+    test_dataset_folder = "../../../datasets/images/pascal-voc/transformed/test/"
+    verify_files(test_dataset_folder)
     #generate_images_with_bboxes(test_dataset_folder + "rcnn_dataset_0")

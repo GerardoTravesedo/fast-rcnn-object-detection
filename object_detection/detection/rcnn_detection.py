@@ -8,6 +8,7 @@ import learning_rate.exponential_decay_learning_rate_manager as rm
 import detection.rcnn_net as rcnn_net
 import dataset.dataset_reader as ds_reader
 import tools.output_analyzer as output_analyzer
+import output.result_generator as result_generator
 
 from tensorflow.python.client import device_lib
 
@@ -167,6 +168,8 @@ class RCNNDetection:
             self._config.get_number_max_foreground_rois_per_image_batch())
         test_batch = test_reader.get_batch()
 
+        result_container = result_generator.ResultGenerator(self._config.get_test_output_folder())
+
         while test_batch != {}:
             predicted_classes = self._sess.run(prediction, feed_dict={
                 self._image_input_batch: test_batch["images"],
@@ -174,21 +177,12 @@ class RCNNDetection:
             })
 
             # Preparing some information for logging
-            gt_boxes = [gt_object["bbox"] for gt_object in test_batch["gt_objects"]]
-            gt_boxes = [[box[0], box[1], box[0] + box[2], box[1] + box[3]] for box in gt_boxes]
-            gt_classes = [gt_object["class"] for gt_object in test_batch["gt_objects"]]
+            result_container.add_record(test_batch, predicted_classes)
 
-            # Logging information about the prediction to be able to analyze it later
-            output_analyzer.write_image_detection_predictions_to_file(
-                self._config.get_test_output_file(),
-                "../output/detectionimages/",
-                test_batch["images"][0],
-                test_batch["images_names"][0].split("/")[-1],
-                gt_boxes,
-                gt_classes,
-                predicted_classes[:, :4],
-                predicted_classes[:, 4])
+            # Get next batch
             test_batch = test_reader.get_batch()
+
+        result_container.generate_analysis_report()
 
         print("Done predicting. It took {0} minutes"
               .format((time.time() - prediction_start_time) / 60))
@@ -244,10 +238,10 @@ if __name__ == '__main__':
 
     properties = "../config/config.ini"
 
-    training_folder = "../../../datasets/images/pascal-voc/transformed/training-reduced/"
+    training_folder = "../../../datasets/images/pascal-voc/transformed/training/"
     training_files = [training_folder + file_name for file_name in listdir(training_folder)]
 
-    test_folder = "../../../datasets/images/pascal-voc/transformed/test-reduced/"
+    test_folder = "../../../datasets/images/pascal-voc/transformed/training/"
     test_files = [test_folder + file_name for file_name in listdir(test_folder)]
 
     run(properties, training_files, test_files)
