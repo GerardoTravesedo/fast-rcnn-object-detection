@@ -16,7 +16,7 @@ matplotlib==3.0.3
 mock==3.0.4
 more-itertools==7.0.0
 networkx==2.3
-numpy==1.16.3
+numpy==1.22.0
 opencv-python==4.1.0.25
 pandas==0.25.0
 Pillow==6.0.0
